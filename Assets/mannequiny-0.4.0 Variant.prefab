@@ -1,0 +1,137 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1001 &1301251132969329553
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 1700752026, guid: ca5b750d312837d44bd5ab227bca577c, type: 3}
+      propertyPath: m_ApplyRootMotion
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1700752026, guid: ca5b750d312837d44bd5ab227bca577c, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1700752026, guid: ca5b750d312837d44bd5ab227bca577c, type: 3}
+      propertyPath: m_CullingMode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1700752026, guid: ca5b750d312837d44bd5ab227bca577c, type: 3}
+      propertyPath: m_UpdateMode
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1700752026, guid: ca5b750d312837d44bd5ab227bca577c, type: 3}
+      propertyPath: m_WarningMessage
+      value: "\nBinding warning: Some generic clip(s) animate transforms that are
+        already bound by a Humanoid avatar. These transforms can only be changed
+        by Humanoid clips.\n\tTransform 'ball.l'\n\tTransform 'ball.r'\n\tTransform
+        'pelvis'\n\tTransform 'hand.r'\n\tTransform 'lowerarm.l'\n\tTransform 'upperarm.l'\n\tTransform
+        'ball.l'\n\tTransform 'head'\n\tTransform 'upperarm.r'\n\tTransform 'spine_02'\n\tand
+        more ...\n\tFrom animation clip 'root|idle'"
+      objectReference: {fileID: 0}
+    - target: {fileID: 248596658379062340, guid: ca5b750d312837d44bd5ab227bca577c,
+        type: 3}
+      propertyPath: m_Name
+      value: mannequiny-0.4.0
+      objectReference: {fileID: 0}
+    - target: {fileID: 592471820791719678, guid: ca5b750d312837d44bd5ab227bca577c,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 343
+      objectReference: {fileID: 0}
+    - target: {fileID: 592471820791719678, guid: ca5b750d312837d44bd5ab227bca577c,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -249
+      objectReference: {fileID: 0}
+    - target: {fileID: 592471820791719678, guid: ca5b750d312837d44bd5ab227bca577c,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 116
+      objectReference: {fileID: 0}
+    - target: {fileID: 592471820791719678, guid: ca5b750d312837d44bd5ab227bca577c,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 592471820791719678, guid: ca5b750d312837d44bd5ab227bca577c,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 592471820791719678, guid: ca5b750d312837d44bd5ab227bca577c,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 592471820791719678, guid: ca5b750d312837d44bd5ab227bca577c,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 592471820791719678, guid: ca5b750d312837d44bd5ab227bca577c,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 592471820791719678, guid: ca5b750d312837d44bd5ab227bca577c,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 592471820791719678, guid: ca5b750d312837d44bd5ab227bca577c,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 592471820791719678, guid: ca5b750d312837d44bd5ab227bca577c,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 592471820791719678, guid: ca5b750d312837d44bd5ab227bca577c,
+        type: 3}
+      propertyPath: m_LocalScale.x
+      value: 300
+      objectReference: {fileID: 0}
+    - target: {fileID: 592471820791719678, guid: ca5b750d312837d44bd5ab227bca577c,
+        type: 3}
+      propertyPath: m_LocalScale.y
+      value: 300
+      objectReference: {fileID: 0}
+    - target: {fileID: 592471820791719678, guid: ca5b750d312837d44bd5ab227bca577c,
+        type: 3}
+      propertyPath: m_LocalScale.z
+      value: 300
+      objectReference: {fileID: 0}
+    - target: {fileID: 2452285392999087998, guid: ca5b750d312837d44bd5ab227bca577c,
+        type: 3}
+      propertyPath: m_RootBone
+      value: 
+      objectReference: {fileID: 264320996100324918}
+    - target: {fileID: 2452285392999087998, guid: ca5b750d312837d44bd5ab227bca577c,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: c155ab164ec0bc74898da1a356eed06e, type: 2}
+    - target: {fileID: 2452285392999087998, guid: ca5b750d312837d44bd5ab227bca577c,
+        type: 3}
+      propertyPath: m_Materials.Array.data[1]
+      value: 
+      objectReference: {fileID: 2100000, guid: c155ab164ec0bc74898da1a356eed06e, type: 2}
+    - target: {fileID: 2452285392999087998, guid: ca5b750d312837d44bd5ab227bca577c,
+        type: 3}
+      propertyPath: m_Materials.Array.data[2]
+      value: 
+      objectReference: {fileID: 2100000, guid: c155ab164ec0bc74898da1a356eed06e, type: 2}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: ca5b750d312837d44bd5ab227bca577c, type: 3}
+--- !u!4 &264320996100324918 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 1271694639716015527, guid: ca5b750d312837d44bd5ab227bca577c,
+    type: 3}
+  m_PrefabInstance: {fileID: 1301251132969329553}
+  m_PrefabAsset: {fileID: 0}

@@ -17,11 +17,8 @@ Shader "UnityChan/Hair - Double-sided"
 
 	SubShader
 	{
-		Blend SrcAlpha OneMinusSrcAlpha, One One
 		Tags
 		{
-			"Queue" = "Transparent+1"
-			"IgnoreProjector" = "True"
 			"RenderType"="Opaque"
 			"Queue"="Geometry"
 			"LightMode"="ForwardBase"
