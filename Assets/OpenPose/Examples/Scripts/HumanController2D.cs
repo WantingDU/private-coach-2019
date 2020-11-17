@@ -177,7 +177,7 @@ namespace OpenPose.Example {
         void Start() {
             InitJoints();
             //-------------- PILS -----------------//
-            standardModel = GameObject.Find("mannequiny-0.4.0");
+            standardModel = GameObject.Find("godot");
             //-------------- PILS -----------------//
 
         }
