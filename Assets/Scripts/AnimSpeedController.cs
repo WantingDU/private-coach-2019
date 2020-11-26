@@ -5,7 +5,7 @@ using UnityEngine.UI;
 public class AnimSpeedController : MonoBehaviour
 {
     [SerializeField] float animSpeedControl = 1f;
-    [SerializeField] Animator mainAnimator;
+    [SerializeField] List<Animator> mainAnimator;
     Slider Slider;
     private void Start()
     {
@@ -15,6 +15,9 @@ public class AnimSpeedController : MonoBehaviour
     public void onChangeSpeed()
     {
         animSpeedControl = Slider.value;
-        mainAnimator.SetFloat("speed", animSpeedControl);
+        foreach (Animator _animator in mainAnimator){
+            _animator.SetFloat("speed", animSpeedControl);
+        }
+        
     }
 }

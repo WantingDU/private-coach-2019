@@ -6,6 +6,7 @@ public class GestureControl : MonoBehaviour
 {
 
     private float rotationX;
+
     private float scaleRotationX = 5f;
 
     private float positionX;
@@ -31,6 +32,8 @@ public class GestureControl : MonoBehaviour
         {
             rotationX = -Input.GetAxis("Mouse X") * scaleRotationX;
             transform.Rotate(0f, rotationX, 0f, Space.World);
+
+
         }
     }
 

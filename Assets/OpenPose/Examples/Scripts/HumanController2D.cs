@@ -16,6 +16,7 @@ namespace OpenPose.Example {
         public int HandKeypointsCount = 21;
         public int FaceKeypointsCount = 70;
         //---------------- PILS -------------------------//
+        [SerializeField]
         private GameObject standardModel;
         //---------------- PILS -------------------------//
         [SerializeField] RectTransform PoseParent;
@@ -177,6 +178,7 @@ namespace OpenPose.Example {
         void Start() {
             InitJoints();
             //-------------- PILS -----------------//
+            if (standardModel == null) 
             standardModel = GameObject.Find("godot");
             //-------------- PILS -----------------//
 
