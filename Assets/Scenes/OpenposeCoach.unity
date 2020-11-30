@@ -1114,6 +1114,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: EasyMotionRecorder
       objectReference: {fileID: 0}
+    - target: {fileID: 1076081908508874, guid: 26de42e5745b2b547b1714ecb3625597, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4734933881020700, guid: 26de42e5745b2b547b1714ecb3625597, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
