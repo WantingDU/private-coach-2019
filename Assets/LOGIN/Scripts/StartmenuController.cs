@@ -21,6 +21,6 @@ public class StartmenuController : MonoBehaviour
 
     public void OnSkip()
     {
-        SceneManager.LoadScene("Scene2");
+        SceneManager.LoadScene(1);
     }
 }

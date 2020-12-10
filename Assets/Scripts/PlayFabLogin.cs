@@ -1,11 +1,29 @@
 ﻿using PlayFab;
 using PlayFab.ClientModels;
 using UnityEngine;
+using UnityEngine.UI;
+using UnityEngine.SceneManagement;
+using Lean.Gui;
 
 public class PlayFabLogin : MonoBehaviour
 {
+    public InputField MailIn;
+    public InputField PasswordIn;
+    public InputField Username;
+    public CanvasGroup SignInComponents;
+
+    public GameObject MessagePulse;
+    public Text MessageText;
+   
+
     public void Start()
     {
+        SignInComponents.alpha = 0;
+        SignInComponents.blocksRaycasts = false;
+        SignInComponents.interactable = false;
+        MessagePulse = GameObject.Find("Notification");
+        MessageText =MessagePulse.transform.GetComponentInChildren<Text>();
+
         if (string.IsNullOrEmpty(PlayFabSettings.staticSettings.TitleId))
         {
             /*
@@ -14,7 +32,8 @@ public class PlayFabLogin : MonoBehaviour
             */
             PlayFabSettings.staticSettings.TitleId = "A364D";
         }
-        StaticItems.userID = "dudu";
+        
+        PlayerPrefs.DeleteAll();
         //var request = new LoginWithCustomIDRequest { CustomId = StaticItems.userID, CreateAccount = true };
     }
 
@@ -24,6 +43,9 @@ public class PlayFabLogin : MonoBehaviour
         PlayerPrefs.SetString("EMAIL",StaticItems.mail);
         PlayerPrefs.SetString("PASSWORD", StaticItems.password);
         PlayerPrefs.SetString("USERNAME", StaticItems.username);
+        MessageText.text = "Congratulations, log in successful!";
+        MessagePulse.GetComponent<LeanPulse>().Pulse();
+        OnSkip();
 
     }
 
@@ -32,24 +54,42 @@ public class PlayFabLogin : MonoBehaviour
         Debug.LogWarning("Something went wrong with your first API call.  :(");
         Debug.LogError("Here's some debug information:");
         Debug.LogError(error.GenerateErrorReport());
-        Debug.Log("signing up with current email and pw");
-        var requestRegist = new RegisterPlayFabUserRequest {Email = StaticItems.mail, Password = StaticItems.password, Username = StaticItems.username };
+        MessageText.text = "This account is not correct, maybe try to sign up ?";
+        MessagePulse.GetComponent<LeanPulse>().Pulse();
+        SignInComponents.alpha = 1;
+        SignInComponents.blocksRaycasts = true;
+        SignInComponents.interactable = true;
+
+    }
+    public void onClickRegister()
+    {
+        StaticItems.mail = MailIn.text;
+        StaticItems.password = PasswordIn.text;
+        StaticItems.username = Username.text;
+        var requestRegist = new RegisterPlayFabUserRequest { Email = StaticItems.mail, Password = StaticItems.password, Username = StaticItems.username };
         PlayFabClientAPI.RegisterPlayFabUser(requestRegist, onRegisterSucces, onRegisterFailure);
     }
     private void onRegisterSucces(RegisterPlayFabUserResult result)
     {
         Debug.Log("Congratulations, you registered successful your account!");
+        MessageText.text = "Congratulations, you registered successful!";
+        MessagePulse.GetComponent<LeanPulse>().Pulse();
     }
     private void onRegisterFailure(PlayFabError error)
     {
         Debug.LogError("Failed to register your account!");
         Debug.LogError("Here's some debug information:");
         Debug.LogError(error.GenerateErrorReport());
+        MessageText.text = "Sorry, Failed to register your account!"+error.GenerateErrorReport();
+        MessagePulse.GetComponent<LeanPulse>().Pulse();
     }
     public void onClickLogin()
     {
+        StaticItems.mail = MailIn.text;
+        StaticItems.password = PasswordIn.text;
         if (PlayerPrefs.HasKey("EMAIL"))
         {
+            print(PlayerPrefs.GetString("EMAIL"));
             Debug.Log("User info exists locally");
             var requestMail = new LoginWithEmailAddressRequest { Email = PlayerPrefs.GetString("EMAIL"), Password = PlayerPrefs.GetString("PASSWORD") };
             PlayFabClientAPI.LoginWithEmailAddress(requestMail, OnLoginSuccess, OnLoginFailure);
@@ -60,5 +100,9 @@ public class PlayFabLogin : MonoBehaviour
             PlayFabClientAPI.LoginWithEmailAddress(requestMail, OnLoginSuccess, OnLoginFailure);
         }
 
+    }
+    public void OnSkip()
+    {
+        SceneManager.LoadScene(1);
     }
 }
