@@ -7,7 +7,6 @@ using UnityEngine.UI;
 
     public class EvaluateAngle : MonoBehaviour
     {
-        public static Text ScoreText;
         public static int[,] OP_anglePoints = new int[,] { {1, 2, 3}, // 0 Right shoulder
                                                             {2, 3, 4}, // 1 Right elbow
                                                             {1, 5, 6}, // 2 left shoulder
@@ -24,15 +23,22 @@ using UnityEngine.UI;
         private static float[] Ref_Cos = new float[10];
         private static float[] Ref_Sin = new float[10];
         public static float[] PointScore = new float[10];
+        public static  int counter = 0;
+        public static float sumScore = 0;
+        public static float average;
+
         private void Awake()
         {
+            counter = 0;
+            sumScore = 0;
+            average = 0;
             //Clear all static data
             OP_Cos = new float[10];
             OP_Sin = new float[10];
             Ref_Cos = new float[10];
             Ref_Sin = new float[10];
             PointScore = new float[10];
-            ScoreText = GameObject.Find("Score").GetComponent<Text>();
+
         }
 
         public static float ComputeCos(Vector3 p1, Vector3 p2, Vector3 p3)
@@ -116,11 +122,25 @@ using UnityEngine.UI;
                     }
             }
 
-            if(n!=0)
-            ScoreText.text = (100f * (score/n)).ToString("F0")+'%';
-            return score;
+        if (n != 0)
+        {
+            score = (100f * (score / n));
         }
+        StaticItems.ScoreText.text = score.ToString("F0") + '%';
+        if(AnimSpeedController.started)
+            CalFeedBack(score);
+        return score;
+        }
+    public static void CalFeedBack(float score)
+    {
+        counter += 1;
+        sumScore += score;
+        average = sumScore / counter;
+        StaticItems.Avg_text.text = average + " %" + "counter=" + counter + " ,sum=" + sumScore;
 
     }
+
+
+}
 
 
