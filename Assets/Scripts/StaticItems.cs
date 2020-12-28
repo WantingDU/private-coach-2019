@@ -15,6 +15,7 @@ public class StaticItems : MonoBehaviour
     public static Text Avg_text;
     public static Text ScoreText;
     public static Text CountDown;
+    public static string AnimName;
     //public static string InfoMessage { set; get; }
     private void Awake()
     {

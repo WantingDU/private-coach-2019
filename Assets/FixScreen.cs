@@ -14,7 +14,7 @@ public class FixScreen : MonoBehaviour
         drag.enabled = true;
     }
 
-    // Update is called once per frame
+
     public void onSwitch2Fix()
     {
         drag.enabled = !this.GetComponent<LeanToggle>().On;

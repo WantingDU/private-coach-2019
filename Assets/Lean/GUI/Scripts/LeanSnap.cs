@@ -62,9 +62,16 @@ namespace Lean.Gui
 		{
 			cachedRectTransform = GetComponent<RectTransform>();
 		}
+        ///----------------------------- PILS ----------------
+        public void SnapWrapper()
+        {
+            cachedRectTransform.anchoredPosition = new Vector2(-1000f, 0f);
+        }
+        ///----------------------------- PILS ----------------
 
-		protected virtual void LateUpdate()
+        protected virtual void LateUpdate()
 		{
+           
 			if (disableWith != null && disableWith.Dragging == true)
 			{
 				return;
@@ -75,8 +82,7 @@ namespace Lean.Gui
 			var parentSize       = ParentSize;
 			var intervalX        = horizontalIntervalPixel + horizontalIntervalRect * rect.width + horizontalIntervalParent * parentSize.x;
 			var intervalY        =   verticalIntervalPixel +   verticalIntervalRect * rect.width +   verticalIntervalParent * parentSize.y;
-
-			if (horizontal == true && intervalX != 0.0f)
+            if (horizontal == true && intervalX != 0.0f)
 			{
 				var target = Mathf.Round((anchoredPosition.x - horizontalOffset) / intervalX) * intervalX + horizontalOffset;
 				var factor = LeanHelper.DampenFactor(horizontalSpeed, Time.deltaTime);
