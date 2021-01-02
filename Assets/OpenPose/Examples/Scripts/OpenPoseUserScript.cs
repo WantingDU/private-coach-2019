@@ -82,6 +82,9 @@ namespace OpenPose.Example {
 
             // Start OpenPose
             OPWrapper.OPRun();
+
+            //------------- PILS -----------------------------//
+            ToggleRenderBgImg();
         }
 
         // User can change the settings here
