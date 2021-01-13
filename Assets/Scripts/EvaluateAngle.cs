@@ -124,7 +124,7 @@ public class EvaluateAngle : MonoBehaviour
                         score += PointScore[i];
                         n += 1;
                     }
-                    else
+                    else 
                     {
                         PointScore[i] = 0;
 

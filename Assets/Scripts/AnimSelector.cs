@@ -1,4 +1,5 @@
 ﻿using Lean.Gui;
+using PlayFab;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -16,15 +17,24 @@ public class AnimSelector : MonoBehaviour
     public void onStartSport()
     {
         RuntimeAnimatorController choosedAnim = Resources.Load("Anim/AnimController/" + StaticItems.AnimName) as RuntimeAnimatorController;
-        print(choosedAnim);
-        try
+        //check which joints to evaluate from Playfab database
+        if (PlayFabClientAPI.IsClientLoggedIn())
         {
-            StaticItems.ClientGetTitleData(StaticItems.AnimName);
+            try
+            {
+                StaticItems.ClientGetTitleData(StaticItems.AnimName);
+            }
+            finally
+            {
+                Debug.Log("finished");
+            }
         }
-        finally
+        //if not login, assum evaluate all joints
+        else
         {
-            Debug.Log("finished");
+            StaticItems.ChoosedAngles = new List<int>(new int[] { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 });
         }
+
         StaticItems.Coach.GetComponent<Animator>().runtimeAnimatorController = choosedAnim;
         GameObject.Find("Screens").GetComponent<LeanSnap>().SnapWrapper();
         GameObject.Find("LeanWindowCloser").GetComponent<LeanWindowCloser>().CloseAll();

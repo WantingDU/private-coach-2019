@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
-
 using UnityEngine;
 using UnityEngine.UI;
 public class AnimSpeedController : MonoBehaviour
@@ -73,6 +72,7 @@ public class AnimSpeedController : MonoBehaviour
             EvaluateAngle.counter = 0;
             EvaluateAngle.sumScore = 0;
         }
+
         started = !started;
     }
 

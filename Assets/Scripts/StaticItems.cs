@@ -46,15 +46,20 @@ public class StaticItems : MonoBehaviour
     {
         PlayFabClientAPI.GetTitleData(new GetTitleDataRequest(),
             result => {
-                if (result.Data == null || !result.Data.ContainsKey(sportName)) Debug.Log("No " + sportName);
+                if (result.Data == null || !result.Data.ContainsKey(sportName))
+                {
+                    Debug.Log("No " + sportName + ", set to default.");
+                    ChoosedAngles = new List<int>(new int[] { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 });
+                }
                 else
                 {
-                    Debug.Log(sportName + ": " + result.Data[sportName]);
-                    print("result split:"+result.Data[sportName].Split(new char[] { ',' }).Select(Int32.Parse).ToList());
+                    Debug.Log(sportName + ": " + result.Data[sportName] );
+                    print("result split:" + result.Data[sportName].Split(new char[] { ',' }).Select(Int32.Parse).ToList());
                     ChoosedAngles = result.Data[sportName].Split(new char[] { ',' }).Select(Int32.Parse).ToList();
                 }
             },
             error => {
+                ChoosedAngles = new List<int>(new int[] { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 });
                 Debug.Log("Got error getting titleData:");
                 Debug.Log(error.GenerateErrorReport());
             }
