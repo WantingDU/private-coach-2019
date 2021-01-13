@@ -9,6 +9,7 @@ public class AnimSpeedController : MonoBehaviour
     [SerializeField] float animSpeedControl = 1f;
     [SerializeField] List<Animator> mainAnimator;
     Slider Slider;
+    float choosedSpeed;
     public static bool started;
     private void Start()
     {
@@ -19,7 +20,7 @@ public class AnimSpeedController : MonoBehaviour
             _animator.SetFloat("speed", animSpeedControl);
         }
     }
-    // Start is called before the first frame update
+
     public void onChangeSpeed()
     {
         animSpeedControl = Slider.value;
@@ -27,6 +28,7 @@ public class AnimSpeedController : MonoBehaviour
         {
             _animator.SetFloat("speed", animSpeedControl);
         }
+
     }
     public void onClickStart()
     {
@@ -38,6 +40,7 @@ public class AnimSpeedController : MonoBehaviour
         }
         else
         {
+            choosedSpeed = Slider.value;
             Slider.value = 0;
             started = !started;
         }
@@ -45,6 +48,7 @@ public class AnimSpeedController : MonoBehaviour
     }
     IEnumerator executeWait()
     {
+       
         StaticItems.CountDown.gameObject.SetActive(true);
         StaticItems.CountDown.text = "3";
         yield return new WaitForSeconds(1);
@@ -56,11 +60,15 @@ public class AnimSpeedController : MonoBehaviour
         yield return new WaitForSeconds(0.5f);
         StaticItems.CountDown.text = "";
         StaticItems.CountDown.gameObject.SetActive(false);
+        // reset score recorder and start animation
         foreach (Animator _animator in mainAnimator)
         {
             _animator.Rebind();
             if (Slider.value == 0)
                 Slider.value = 1.0f;
+            if(choosedSpeed!=0)
+                Slider.value = choosedSpeed;
+                onChangeSpeed();
             EvaluateAngle.average = 0;
             EvaluateAngle.counter = 0;
             EvaluateAngle.sumScore = 0;

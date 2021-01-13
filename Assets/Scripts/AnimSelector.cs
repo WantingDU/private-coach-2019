@@ -17,6 +17,14 @@ public class AnimSelector : MonoBehaviour
     {
         RuntimeAnimatorController choosedAnim = Resources.Load("Anim/AnimController/" + StaticItems.AnimName) as RuntimeAnimatorController;
         print(choosedAnim);
+        try
+        {
+            StaticItems.ClientGetTitleData(StaticItems.AnimName);
+        }
+        finally
+        {
+            Debug.Log("finished");
+        }
         StaticItems.Coach.GetComponent<Animator>().runtimeAnimatorController = choosedAnim;
         GameObject.Find("Screens").GetComponent<LeanSnap>().SnapWrapper();
         GameObject.Find("LeanWindowCloser").GetComponent<LeanWindowCloser>().CloseAll();

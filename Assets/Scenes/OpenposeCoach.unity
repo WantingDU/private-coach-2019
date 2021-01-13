@@ -2308,21 +2308,12 @@ MonoBehaviour:
     m_Alignment: 1
     m_AlignByGeometry: 0
     m_RichText: 1
-    m_HorizontalOverflow: 1
+    m_HorizontalOverflow: 0
     m_VerticalOverflow: 1
     m_LineSpacing: 1
-  m_Text: '<size=120>SQUAT</size>
-
-
-    XXXXXXXXXXXXXXXXXXX
-
-    XX
-
-    XXXXXXXXXXXXXXXXXX
-
-    XXX
-
-'
+  m_Text: "<size=120>SQUAT</size>\nSquats are considered a vital exercise for increasing
+    the strength and size of the lower body muscles as well as developing core strength.
+    \n"
 --- !u!222 &274775716
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -6283,7 +6274,7 @@ MonoBehaviour:
       m_Calls: []
   m_FontData:
     m_Font: {fileID: 12800000, guid: d54323c94c164de478170d5e7d0273be, type: 3}
-    m_FontSize: 90
+    m_FontSize: 80
     m_FontStyle: 0
     m_BestFit: 0
     m_MinSize: 3
@@ -6291,17 +6282,14 @@ MonoBehaviour:
     m_Alignment: 1
     m_AlignByGeometry: 0
     m_RichText: 1
-    m_HorizontalOverflow: 1
+    m_HorizontalOverflow: 0
     m_VerticalOverflow: 1
     m_LineSpacing: 1
   m_Text: '<size=120>RUN</size>
 
-
-    XXXXXXXXXXXXXXXXX
-
-    XXXXXXXXXXXXXXXXX
-
-    XXXXXXXX'
+    Running can assist people in losing weight,
+    staying in shape and improving body composition. Research suggests that the person
+    of average weight will burn approximately 100 calories per mile run.'
 --- !u!222 &704910509
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -8974,7 +8962,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 1
     m_VerticalOverflow: 1
     m_LineSpacing: 1
-  m_Text: 0
+  m_Text: 
 --- !u!222 &964099694
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -18214,7 +18202,7 @@ RectTransform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1875100365}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 682.0615}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.74933296, y: 0.74933296, z: 0.74933296}
   m_Children:
   - {fileID: 2143935906}
@@ -20443,7 +20431,7 @@ PrefabInstance:
     - target: {fileID: 1942672870011225781, guid: 771ea1b9a89154549b556555dd9c3d8c,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -584.00006
+      value: -300
       objectReference: {fileID: 0}
     - target: {fileID: 1942672870011225781, guid: 771ea1b9a89154549b556555dd9c3d8c,
         type: 3}
@@ -20654,7 +20642,7 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Controller
       value: 
-      objectReference: {fileID: 9100000, guid: 2aef81719808baa48b62de6d51f0f325, type: 2}
+      objectReference: {fileID: 9100000, guid: 2948c0a4bc73cf24aabf0dbf9ebeded5, type: 2}
     - target: {fileID: 5482550330198793423, guid: 771ea1b9a89154549b556555dd9c3d8c,
         type: 3}
       propertyPath: m_Enabled
