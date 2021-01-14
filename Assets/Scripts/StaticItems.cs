@@ -20,10 +20,18 @@ public class StaticItems : MonoBehaviour
     public static Text Avg_text;
     public static Text ScoreText;
     public static Text CountDown;
+    public static Text Timer;
     public static string AnimName;
-    
+    public static int sportDuration { set; get; }
+
+
+    public void sportDuration_string() {
+        string sportDuration_string = GameObject.Find("inputText_duration").GetComponent<Text>().text;
+        sportDuration= int.Parse(sportDuration_string);
+    }
+
     //public static List<int> ChoosedAngles= new List<int>();
-    public static List<int> ChoosedAngles = new List<int>(new int[] { 0,1,2,3,4,5,6,7,8,9 }); 
+    public static List<int> ChoosedAngles = new List<int>(new int[] { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 });
 
     private void Awake()
     {
@@ -31,6 +39,7 @@ public class StaticItems : MonoBehaviour
         ScoreText = GameObject.Find("Score").GetComponent<Text>();
         Avg_text = GameObject.Find("Avg_score").GetComponent<Text>();
         CountDown = GameObject.Find("countDown").GetComponent<Text>();
+        Timer = GameObject.Find("Timer").GetComponent<Text>();
         StaticItems.CountDown.gameObject.SetActive(false);
         //ChoosedAngles.Add(1);
         //ChoosedAngles.Add(3);
@@ -53,7 +62,7 @@ public class StaticItems : MonoBehaviour
                 }
                 else
                 {
-                    Debug.Log(sportName + ": " + result.Data[sportName] );
+                    Debug.Log(sportName + ": " + result.Data[sportName]);
                     print("result split:" + result.Data[sportName].Split(new char[] { ',' }).Select(Int32.Parse).ToList());
                     ChoosedAngles = result.Data[sportName].Split(new char[] { ',' }).Select(Int32.Parse).ToList();
                 }
@@ -67,7 +76,7 @@ public class StaticItems : MonoBehaviour
     }
     public static bool isAllChoosedDetected()
     {
-        for (int i = 0; i <10; i++)
+        for (int i = 0; i < 10; i++)
         {
             if (ChoosedAngles.Contains(i))
             {
@@ -77,6 +86,8 @@ public class StaticItems : MonoBehaviour
         }
         return true;
     }
+
+
     private void OnDestroy()
     {
         

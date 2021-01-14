@@ -10,6 +10,7 @@ public class AnimSpeedController : MonoBehaviour
     Slider Slider;
     float choosedSpeed;
     public static bool started;
+    public Coroutine co;
     private void Start()
     {
         started = false;
@@ -35,6 +36,7 @@ public class AnimSpeedController : MonoBehaviour
         {
             //StaticItems.Delay(3000);
             StartCoroutine(executeWait());
+            GameObject.Find("start_sport").GetComponentInChildren<Text>().text = "Stop";
 
         }
         else
@@ -42,6 +44,9 @@ public class AnimSpeedController : MonoBehaviour
             choosedSpeed = Slider.value;
             Slider.value = 0;
             started = !started;
+            GameObject.Find("start_sport").GetComponentInChildren<Text>().text = "Start";
+            StopCoroutine(co);
+            
         }
         
     }
@@ -75,12 +80,24 @@ public class AnimSpeedController : MonoBehaviour
         }
 
         started = !started;
+        co=StartCoroutine(executeTimer());
     }
 
-  
-        
+    IEnumerator executeTimer()
+    {
+        for(int i= StaticItems.sportDuration*60; i >=0; i--)
+        {
+            StaticItems.Timer.text = i.ToString()+"s";
+            yield return new WaitForSeconds(1f);
+        }
+        StaticItems.Timer.text = "Finished!";
+        onClickStart();
+    }
 
-    
 
 
-}
+
+
+
+
+    }
