@@ -65,6 +65,18 @@ public class StaticItems : MonoBehaviour
             }
         );
     }
+    public static bool isAllChoosedDetected()
+    {
+        for (int i = 0; i <10; i++)
+        {
+            if (ChoosedAngles.Contains(i))
+            {
+                if (EvaluateAngle.PointScore[i] == 0) return false;
+            }
+
+        }
+        return true;
+    }
     private void OnDestroy()
     {
         

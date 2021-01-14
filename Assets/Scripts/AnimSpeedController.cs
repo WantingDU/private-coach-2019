@@ -56,7 +56,8 @@ public class AnimSpeedController : MonoBehaviour
         StaticItems.CountDown.text = "1";
         yield return new WaitForSeconds(1);
         StaticItems.CountDown.text = "Start";
-        yield return new WaitForSeconds(0.5f);
+        //yield return new WaitForSeconds(0.5f);
+        yield return new WaitUntil(()=>StaticItems.isAllChoosedDetected());
         StaticItems.CountDown.text = "";
         StaticItems.CountDown.gameObject.SetActive(false);
         // reset score recorder and start animation

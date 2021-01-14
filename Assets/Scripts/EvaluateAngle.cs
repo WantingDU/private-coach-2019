@@ -103,7 +103,6 @@ public class EvaluateAngle : MonoBehaviour
         }
 
 
-
         //print("left elbow cos: " + OP_Cos[3]);
         //print("left elbow sin: " + OP_Sin[3]);
 

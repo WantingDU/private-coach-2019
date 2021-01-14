@@ -30,6 +30,7 @@ public class ModelToBody25 : MonoBehaviour
             if (!StaticItems.ChoosedAngles.Contains(i))
             {
                 renderballs[i].enabled = false;
+                EvaluateAngle.PointScore[i] = 0;
             }
             //when the joint is not detected
             else if (EvaluateAngle.PointScore[i] == 0)
