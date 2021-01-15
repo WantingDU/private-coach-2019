@@ -20,18 +20,20 @@ public class StaticItems : MonoBehaviour
     public static Text Avg_text;
     public static Text ScoreText;
     public static Text CountDown;
+    public static Text AdviseText;
     public static Text Timer;
     public static string AnimName;
     public static int sportDuration { set; get; }
+    //public static List<int> ChoosedAngles= new List<int>();
+    public static List<int> ChoosedAngles = new List<int>(new int[] { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 });
 
+    public static string ErrorMessage;
+    public static string ErrorTime;
 
     public void sportDuration_string() {
         string sportDuration_string = GameObject.Find("inputText_duration").GetComponent<Text>().text;
         sportDuration= int.Parse(sportDuration_string);
     }
-
-    //public static List<int> ChoosedAngles= new List<int>();
-    public static List<int> ChoosedAngles = new List<int>(new int[] { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 });
 
     private void Awake()
     {
@@ -39,6 +41,7 @@ public class StaticItems : MonoBehaviour
         ScoreText = GameObject.Find("Score").GetComponent<Text>();
         Avg_text = GameObject.Find("Avg_score").GetComponent<Text>();
         CountDown = GameObject.Find("countDown").GetComponent<Text>();
+        AdviseText = GameObject.Find("AdviseText").GetComponent<Text>();
         Timer = GameObject.Find("Timer").GetComponent<Text>();
         StaticItems.CountDown.gameObject.SetActive(false);
         //ChoosedAngles.Add(1);
@@ -80,7 +83,7 @@ public class StaticItems : MonoBehaviour
         {
             if (ChoosedAngles.Contains(i))
             {
-                if (EvaluateAngle.PointScore[i] == 0) return false;
+                if (EvaluateAngle.PointScore[i,0] == 0) return false;
             }
 
         }

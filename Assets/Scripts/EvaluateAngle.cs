@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -7,6 +8,7 @@ using UnityEngine.UI;
 
 public class EvaluateAngle : MonoBehaviour
 {
+    public int checkJoint;
     public static int[,] OP_anglePoints = new int[,] { {1, 2, 3}, // 0 Right shoulder
                                                             {2, 3, 4}, // 1 Right elbow
                                                             {1, 5, 6}, // 2 left shoulder
@@ -22,13 +24,15 @@ public class EvaluateAngle : MonoBehaviour
     private static float[] OP_Sin = new float[10];
     private static float[] Ref_Cos = new float[10];
     private static float[] Ref_Sin = new float[10];
-    public static float[] PointScore = new float[10];
+    public static float[,] PointScore = new float[10,2];
     public static int counter = 0;
     public static float sumScore = 0;
     public static float average;
+    public static int checkJoint_static;
 
     private void Awake()
     {
+        checkJoint_static = checkJoint;
         counter = 0;
         sumScore = 0;
         average = 0;
@@ -37,7 +41,7 @@ public class EvaluateAngle : MonoBehaviour
         OP_Sin = new float[10];
         Ref_Cos = new float[10];
         Ref_Sin = new float[10];
-        PointScore = new float[10];
+        PointScore = new float[10,2];
 
     }
 
@@ -101,15 +105,23 @@ public class EvaluateAngle : MonoBehaviour
                 }
             }
         }
-
-
-        //print("left elbow cos: " + OP_Cos[3]);
-        //print("left elbow sin: " + OP_Sin[3]);
-
-        //print("left elbow angle standard: " + Mathf.Sign(OP_Sin[3]) * Mathf.Acos(OP_Cos[3]) * 57.29578f);
+    }
+    public static float Compute_angle(float angleSin, float angleCos)
+    {
+        float angle = 0;
+        if (angleSin >= 0)
+        {
+            angle = Mathf.Acos(angleCos);
+        }
+        else
+        {
+            angle = Mathf.PI + Mathf.Acos(angleCos);
+        }
+        return angle;
     }
 
-        public static float ComputeScore()
+
+    public static float ComputeScore()
         {
             float score = 0f;
             int n = 0;
@@ -119,14 +131,32 @@ public class EvaluateAngle : MonoBehaviour
                 {
                     if (!((OP_Cos[i] == 0) && (OP_Sin[i] == 0)))
                     {
-                        PointScore[i] = (1 - Mathf.Abs((OP_Cos[i] - Ref_Cos[i] + OP_Sin[i] - Ref_Sin[i]) / 2.828f));
-                        score += PointScore[i];
+                        float OP_angle = Compute_angle(OP_Sin[i], OP_Cos[i]);
+                        float Ref_angle = Compute_angle(Ref_Sin[i], Ref_Cos[i]);
+                        PointScore[i, 0] = 1-Mathf.Abs(OP_angle - Ref_angle) / (2 * Mathf.PI);
+                        score += PointScore[i,0];
                         n += 1;
-                    }
+
+                    //===============================================
+                        if (i == checkJoint_static)
+                        {
+                            StaticItems.AdviseText.gameObject.SetActive(true);
+                            StaticItems.AdviseText.text = "OP:"+((int)Math.Round(OP_angle *57.3)).ToString()+","+ "Ref:" + ((int)Math.Round(Ref_angle * 57.3)).ToString()+"  "+StaticItems.ErrorMessage;
+                        }
+                    //===============================================   
+                    //Evaluate if the user's angle is small/big compare to the standard p
+                    if (OP_angle > Ref_angle)
+                            {
+                                PointScore[i, 1] = 1; //angle utilisateur trop grand/ouvert
+                            }
+                        else
+                            {
+                                PointScore[i, 1] = 0;
+                            }
+                }
                     else 
                     {
-                        PointScore[i] = 0;
-
+                        PointScore[i,0] = 0;
                     }
                 }
             }
