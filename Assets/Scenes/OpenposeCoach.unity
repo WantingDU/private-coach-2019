@@ -2163,8 +2163,9 @@ GameObject:
   - component: {fileID: 249661553}
   - component: {fileID: 249661555}
   - component: {fileID: 249661554}
+  - component: {fileID: 249661556}
   m_Layer: 5
-  m_Name: Radio 1 (LeanToggle + LeanButton)
+  m_Name: Easy
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2314,10 +2315,33 @@ MonoBehaviour:
       aliases: []
   onOn:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 249661556}
+        m_MethodName: selectDifficulty
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   onOff:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &249661556
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 249661552}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 29029f0ea408d1d4a98e84bf410c5084, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &274775713
 GameObject:
   m_ObjectHideFlags: 0
@@ -3153,7 +3177,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 80}
   m_SizeDelta: {x: 550, y: 60}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!1 &398893779
@@ -3245,8 +3269,9 @@ GameObject:
   - component: {fileID: 408165327}
   - component: {fileID: 408165329}
   - component: {fileID: 408165328}
+  - component: {fileID: 408165330}
   m_Layer: 5
-  m_Name: Radio 3 (LeanToggle + LeanButton)
+  m_Name: Expert
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3338,11 +3363,13 @@ MonoBehaviour:
       aliases: []
   clickTransitions:
     speed: 0
-    roots:
-    - {fileID: 0}
+    roots: []
     aliases: []
     targets: []
-    entries: []
+    entries:
+    - root: {fileID: 0}
+      speed: -1
+      aliases: []
   onDown:
     m_PersistentCalls:
       m_Calls:
@@ -3394,10 +3421,33 @@ MonoBehaviour:
       aliases: []
   onOn:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 408165330}
+        m_MethodName: selectDifficulty
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   onOff:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &408165330
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 408165326}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 29029f0ea408d1d4a98e84bf410c5084, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &411306797
 GameObject:
   m_ObjectHideFlags: 0
@@ -3509,8 +3559,9 @@ GameObject:
   - component: {fileID: 422519452}
   - component: {fileID: 422519454}
   - component: {fileID: 422519453}
+  - component: {fileID: 422519455}
   m_Layer: 5
-  m_Name: Radio 2 (LeanToggle + LeanButton)
+  m_Name: Middle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3660,10 +3711,33 @@ MonoBehaviour:
       aliases: []
   onOn:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 422519455}
+        m_MethodName: selectDifficulty
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   onOff:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &422519455
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 422519451}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 29029f0ea408d1d4a98e84bf410c5084, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &441296455
 GameObject:
   m_ObjectHideFlags: 0
@@ -6088,10 +6162,10 @@ RectTransform:
   m_Father: {fileID: 310161803}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -28, y: 197}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchorMin: {x: 0.5, y: 1}
+  m_AnchorMax: {x: 0.5, y: 1}
+  m_AnchoredPosition: {x: 0, y: -100}
+  m_SizeDelta: {x: 1200, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &618154714
 MonoBehaviour:
@@ -6119,13 +6193,13 @@ MonoBehaviour:
     m_BestFit: 0
     m_MinSize: 3
     m_MaxSize: 40
-    m_Alignment: 4
+    m_Alignment: 0
     m_AlignByGeometry: 0
     m_RichText: 0
-    m_HorizontalOverflow: 1
+    m_HorizontalOverflow: 0
     m_VerticalOverflow: 1
     m_LineSpacing: 1
-  m_Text: xxx
+  m_Text: 
 --- !u!222 &618154715
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -6272,8 +6346,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   remainingPulses: 0
   remainingTime: 0
-  timeInterval: 0.4
-  timing: 1
+  timeInterval: 0.1
+  timing: 2
   pulseTransitions:
     speed: 0
     roots: []
@@ -6949,7 +7023,7 @@ RectTransform:
   m_GameObject: {fileID: 705740036}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 2, y: 2, z: 2}
   m_Children: []
   m_Father: {fileID: 376541859}
   m_RootOrder: 0

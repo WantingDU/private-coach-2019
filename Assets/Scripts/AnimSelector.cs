@@ -29,10 +29,10 @@ public class AnimSelector : MonoBehaviour
                 Debug.Log("finished");
             }
         }
-        //if not login, assum evaluate all joints
+        //if not login, assum evaluate default joints
         else
         {
-            StaticItems.ChoosedAngles = new List<int>(new int[] { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 });
+            StaticItems.ChoosedAngles = StaticItems.ChoosedAngles_default;
         }
 
         StaticItems.Coach.GetComponent<Animator>().runtimeAnimatorController = choosedAnim;

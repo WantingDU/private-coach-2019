@@ -25,14 +25,16 @@ public class StaticItems : MonoBehaviour
     public static Text Timer;
     public static string AnimName;
     public static int sportDuration { set; get; }
+    public static int elapsedTime;
     public static float eval_standard { set; get; }
-    //public static List<int> ChoosedAngles= new List<int>();
     public static List<int> ChoosedAngles = new List<int>(new int[] { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 });
+    public static List<int> ChoosedAngles_default = new List<int>(new int[] { 0, 1, 2, 3 });// change here for local choice
     public static int frameInterval = 300;
     public static int messageRate { set; get; }
     public static string ErrorMessage;
+    public static string difficulty { set; get; }
     public static string ErrorTime;
-
+    public static int[] errorStatistics=new int[10];
     public void sportDuration_string() {
         string sportDuration_string = GameObject.Find("inputText_duration").GetComponent<Text>().text;
         sportDuration= int.Parse(sportDuration_string);
@@ -43,6 +45,8 @@ public class StaticItems : MonoBehaviour
         eval_standard = 0.7f;
         frameInterval = 300;
         messageRate = 50;
+        difficulty = "Easy";
+        sportDuration = 1;//default 1 min
         Coach = GameObject.Find("godot");
         ScoreText = GameObject.Find("Score").GetComponent<Text>();
         Avg_text = GameObject.Find("Avg_score").GetComponent<Text>();
@@ -97,7 +101,6 @@ public class StaticItems : MonoBehaviour
         }
         return true;
     }
-
 
     private void OnDestroy()
     {

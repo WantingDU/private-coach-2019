@@ -9,11 +9,13 @@ public class AnimSpeedController : MonoBehaviour
     [SerializeField] List<Animator> mainAnimator;
     Slider Slider;
     float choosedSpeed;
+    public static bool clicked_start;
     public static bool started;
     public Coroutine co;
     private void Start()
     {
         started = false;
+        clicked_start = false;
         Slider = GameObject.Find("Slider").GetComponent<Slider>();
         foreach (Animator _animator in mainAnimator)
         {
@@ -32,6 +34,7 @@ public class AnimSpeedController : MonoBehaviour
     }
     public void onClickStart()
     {
+        clicked_start = !clicked_start;
         if (!started)
         {
             //StaticItems.Delay(3000);
@@ -87,6 +90,7 @@ public class AnimSpeedController : MonoBehaviour
     {
         for(int i= StaticItems.sportDuration*60; i >=0; i--)
         {
+            StaticItems.elapsedTime = i;
             StaticItems.Timer.text = i.ToString()+"s";
             yield return new WaitForSeconds(1f);
         }

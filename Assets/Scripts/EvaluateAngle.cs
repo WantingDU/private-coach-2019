@@ -1,6 +1,8 @@
+using Lean.Gui;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -9,6 +11,7 @@ using UnityEngine.UI;
 public class EvaluateAngle : MonoBehaviour
 {
     public int checkJoint;
+    public static int[] invisible_counter = new int[10];
     public static int[,] OP_anglePoints = new int[,] { {1, 2, 3}, // 0 Right shoulder
                                                             {2, 3, 4}, // 1 Right elbow
                                                             {1, 5, 6}, // 2 left shoulder
@@ -20,6 +23,7 @@ public class EvaluateAngle : MonoBehaviour
                                                             {9, 10, 11}, // 8 Knee right
                                                             {12, 13, 14} // 9 Knee left
                                                         };
+    public static string[] jointsName = { "Right shoulder", "Right elbow", "left shoulder", "Left elbow", "Right bust", "Left bust", "Right hips", "Left hips ", "Right knee", "Left knee" };
     private static float[] OP_Cos = new float[10];
     private static float[] OP_Sin = new float[10];
     private static float[] Ref_Cos = new float[10];
@@ -42,6 +46,7 @@ public class EvaluateAngle : MonoBehaviour
         Ref_Cos = new float[10];
         Ref_Sin = new float[10];
         PointScore = new float[10,2];
+        
 
     }
 
@@ -113,7 +118,7 @@ public class EvaluateAngle : MonoBehaviour
         }
         else
         {
-            angle = Mathf.PI + Mathf.Acos(angleCos);
+            angle = 2*Mathf.PI - Mathf.Acos(angleCos);
         }
         return angle;
     }
@@ -125,16 +130,17 @@ public class EvaluateAngle : MonoBehaviour
             int n = 0;
             for (int i = 0; i < 10; i++)
             {
-                if (StaticItems.ChoosedAngles.Contains(i))
+            if (StaticItems.ChoosedAngles.Contains(i))
+            {
+                if (!((OP_Cos[i] == 0) && (OP_Sin[i] == 0))) //if is joint observed
                 {
-                    if (!((OP_Cos[i] == 0) && (OP_Sin[i] == 0)))
-                    {
-                        //float OP_angle = Compute_angle(OP_Sin[i], OP_Cos[i]);
-                        //float Ref_angle = Compute_angle(Ref_Sin[i], Ref_Cos[i]);
-                        //PointScore[i, 0] = 1-Mathf.Abs(OP_angle - Ref_angle) / (2 * Mathf.PI);
-                        PointScore[i,0] = (1 - Mathf.Abs((OP_Cos[i] - Ref_Cos[i] + OP_Sin[i] - Ref_Sin[i]) / 2.828f));
-                        score += PointScore[i,0];
-                        n += 1;
+                    //float OP_angle = Compute_angle(OP_Sin[i], OP_Cos[i])*57.3f;
+                    //float Ref_angle = Compute_angle(Ref_Sin[i], Ref_Cos[i])* 57.3f;
+                    //print("OP_angle:"+OP_angle +"  "+ "Ref_angle:" + Ref_angle);
+                    invisible_counter[i] = 0;
+                    PointScore[i,0] = (1 - Mathf.Abs((OP_Cos[i] - Ref_Cos[i] + OP_Sin[i] - Ref_Sin[i]) / 2.828f));
+                    score += PointScore[i,0];
+                    n += 1;
 
                     /*===============================================
                         if (i == checkJoint_static)
@@ -153,13 +159,22 @@ public class EvaluateAngle : MonoBehaviour
                         {
                             PointScore[i, 1] = 0;
                         }
-                    }
-                    else 
+                }
+                else 
+                {
+                    PointScore[i,0] = 0;
+                    invisible_counter[i] += 1;
+                    if (invisible_counter[i] >= 30)
                     {
-                        PointScore[i,0] = 0;
+                        invisible_counter[i] = 0;
+                        StaticItems.ErrorMessage = "certaines articulations non visible" ;
+                        print(StaticItems.ErrorMessage);
+                        StaticItems.AdviseText.text = StaticItems.ErrorMessage;
+                        StaticItems.Notification.GetComponent<LeanPulse>().Pulse();
                     }
                 }
             }
+        }
 
         if (n != 0)
         {
@@ -175,11 +190,10 @@ public class EvaluateAngle : MonoBehaviour
         counter += 1;
         sumScore += score;
         average = sumScore / counter;
-        StaticItems.Avg_text.text = average + " %" + "counter=" + counter + " ,sum=" + sumScore;
-
+        StaticItems.Avg_text.text = "Average score: " + average + " %\n" + "Duration: " + (60*StaticItems.sportDuration-StaticItems.elapsedTime) + " s\n"+
+                                    "Difficulty: "+StaticItems.difficulty+
+                                    "\n\nThe joint you are doing wrong the most is "+ jointsName[StaticItems.errorStatistics.ToList().IndexOf(StaticItems.errorStatistics.Max())];
     }
-
-
 }
 
 

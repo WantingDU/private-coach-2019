@@ -61,7 +61,7 @@ public class ModelToBody25 : MonoBehaviour
 
     private void Update()
     {
-       
+        if (!AnimSpeedController.clicked_start) return;
         globalCounter += 1;
         for (int i = 0; i < 10; i++) {
             //When the joint is not choosed
@@ -85,15 +85,16 @@ public class ModelToBody25 : MonoBehaviour
                 if (globalCounter % StaticItems.messageRate == 0)
                 {
                     UnityEngine.Debug.Log(moyPointScore[i, 1]);
-                    if (ratioCol(errorCounter, i) > 0.5*StaticItems.frameInterval)
-                    {       //>50%
-                        UnityEngine.Debug.Log("in ERROR");
+                    if (ratioCol(errorCounter, i) > 0.6*StaticItems.frameInterval)
+                    {       //>60%
+                        UnityEngine.Debug.Log(i+"in ERROR");
                         if (written[i] == 0)
                         { //affectation du niveau de priorité
                             written[i] = i + 1;
                         }
                         if (written.Max() == written[i])
                         { //vérification de la priorité
+                            StaticItems.errorStatistics[i] += 1;
                             StaticItems.ErrorMessage = advices[i, (int)EvaluateAngle.PointScore[i, 1]];
                             StaticItems.AdviseText.text = StaticItems.ErrorMessage;
                             StaticItems.Notification.GetComponent<LeanPulse>().Pulse();
@@ -104,8 +105,7 @@ public class ModelToBody25 : MonoBehaviour
                     else
                     {
                         StaticItems.ErrorMessage = "";
-                        StaticItems.AdviseText.text = StaticItems.ErrorMessage;
-                        
+                        StaticItems.AdviseText.text = StaticItems.ErrorMessage; 
                     }
 
                 }
