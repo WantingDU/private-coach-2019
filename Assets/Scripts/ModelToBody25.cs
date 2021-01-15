@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Lean.Gui;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,14 +13,22 @@ public class ModelToBody25 : MonoBehaviour
     private GameObject[] Myballs= new GameObject[10];
     private MeshRenderer[] renderballs= new MeshRenderer[10];
     private int globalCounter;
-    public int[,] errorCounter = new int[10, 100];
-    public int[,] moyPointScore = new int[10, 2]; //pour chaque point : [sum, moy]
-    public int[] written = { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
-    public string errorMessage;
-    public static string[,] advices = {{"bassez votre bras droit ", "levez votre bras droit"},
+    private int[,] errorCounter = new int[10, StaticItems.frameInterval];
+    private int[,] moyPointScore = new int[10, 2]; //pour chaque point : [sum, moy]
+    private int[] written = { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
+    public static string[,] advices1 = {{"bassez votre bras droit ", "levez votre bras droit"},
                                         {"écartez votre bras droit", "serrez votre bras droit"},
                                         {"bassez votre bras gauche ", "levez votre bras gauche" },
                                         {"écartez votre bras gauche", "serrez votre bras gauche" },
+                                        {"penchez vers la gauche","penchez vers la droite"},{"penchez vers la droite","penchez vers la gauche"},
+                                        {"serrez votre cuisse droite", "ecartez votre cuisse droite"},
+                                        {"pliez votre genoux droit", "pliez votre genoux gauche"},
+                                        {"serrez votre cuisse gauche", "ecartez votre cuisse gauche"},
+                                        {"pliez votre genoux gauche", "pliez votre genoux gauche"}};
+    public static string[,] advices = {{"attention à votre épaule droit","attention à votre épaule droit"},
+                                        {"attention à votre bras droit","attention à votre bras droit"},
+                                        {"attention à  votre épaule gauche","attention à  votre épaule gauche" },
+                                        {"attention à  votre bras gauche","attention à  votre bras gauche" },
                                         {"penchez vers la gauche","penchez vers la droite"},{"penchez vers la droite","penchez vers la gauche"},
                                         {"serrez votre cuisse droite", "ecartez votre cuisse droite"},
                                         {"pliez votre genoux droit", "pliez votre genoux gauche"},
@@ -52,7 +61,7 @@ public class ModelToBody25 : MonoBehaviour
 
     private void Update()
     {
-        bool there_is_an_error = false;
+       
         globalCounter += 1;
         for (int i = 0; i < 10; i++) {
             //When the joint is not choosed
@@ -67,17 +76,16 @@ public class ModelToBody25 : MonoBehaviour
                 renderballs[i].enabled = true;
                 renderballs[i].material.color = Color.gray;
             }
-            else if (EvaluateAngle.PointScore[i,0] < 0.7)
+            else if (EvaluateAngle.PointScore[i,0] < StaticItems.eval_standard)
             {
                 moyPointScore[i, 0] += 1;
-                moyPointScore[i, 1] = (int)((100 * moyPointScore[i, 0]) / globalCounter);
-                there_is_an_error = true;
+                moyPointScore[i, 1] = (int)((StaticItems.frameInterval * moyPointScore[i, 0]) / globalCounter);
                 errorCounter[i, globalCounter % errorCounter.GetLength(1)] = 1;
                 //mise à jour affichage
-                if (globalCounter % 40 == 0)
+                if (globalCounter % StaticItems.messageRate == 0)
                 {
                     UnityEngine.Debug.Log(moyPointScore[i, 1]);
-                    if (ratioCol(errorCounter, i) > 50)
+                    if (ratioCol(errorCounter, i) > 0.5*StaticItems.frameInterval)
                     {       //>50%
                         UnityEngine.Debug.Log("in ERROR");
                         if (written[i] == 0)
@@ -86,24 +94,27 @@ public class ModelToBody25 : MonoBehaviour
                         }
                         if (written.Max() == written[i])
                         { //vérification de la priorité
-                           errorMessage = advices[i, (int)EvaluateAngle.PointScore[i, 1]];
-                            UnityEngine.Debug.Log(EvaluateAngle.PointScore[i, 1].ToString());
-
-                            //update stat
-                            //StaticItems.AdviseText.gameObject.SetActive(true);
                             StaticItems.ErrorMessage = advices[i, (int)EvaluateAngle.PointScore[i, 1]];
-                            //StaticItems.AdviseText.text = errorMessage;
+                            StaticItems.AdviseText.text = StaticItems.ErrorMessage;
+                            StaticItems.Notification.GetComponent<LeanPulse>().Pulse();
+                            //update stat
                             //StaticItems.ErrorTime = DateTime.Now.ToString();
                         }
                     }
+                    else
+                    {
+                        StaticItems.ErrorMessage = "";
+                        StaticItems.AdviseText.text = StaticItems.ErrorMessage;
+                        
+                    }
+
                 }
 
 
+
                 renderballs[i].enabled = true;
-                if (EvaluateAngle.PointScore[i, 1] == 1) // angle trop grand -> rouge
-                    renderballs[i].material.color = new Color(1 - EvaluateAngle.PointScore[i, 0], 0, 0, 1);
-                else
-                    renderballs[i].material.color = new Color(0, 0, 1 - EvaluateAngle.PointScore[i, 0], 1);
+                renderballs[i].material.color =Color.red;
+
             }
         
             //When joint with good angle
@@ -113,10 +124,7 @@ public class ModelToBody25 : MonoBehaviour
                 renderballs[i].enabled = false;
                 written[i] = 0;
             }
-            if (there_is_an_error == false)
-            {
-               errorMessage = "";
-            }
+
         }
     } 
 

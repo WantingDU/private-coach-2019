@@ -21,12 +21,15 @@ public class StaticItems : MonoBehaviour
     public static Text ScoreText;
     public static Text CountDown;
     public static Text AdviseText;
+    public static GameObject Notification;
     public static Text Timer;
     public static string AnimName;
     public static int sportDuration { set; get; }
+    public static float eval_standard { set; get; }
     //public static List<int> ChoosedAngles= new List<int>();
     public static List<int> ChoosedAngles = new List<int>(new int[] { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 });
-
+    public static int frameInterval = 300;
+    public static int messageRate { set; get; }
     public static string ErrorMessage;
     public static string ErrorTime;
 
@@ -37,11 +40,16 @@ public class StaticItems : MonoBehaviour
 
     private void Awake()
     {
+        eval_standard = 0.7f;
+        frameInterval = 300;
+        messageRate = 50;
         Coach = GameObject.Find("godot");
         ScoreText = GameObject.Find("Score").GetComponent<Text>();
         Avg_text = GameObject.Find("Avg_score").GetComponent<Text>();
         CountDown = GameObject.Find("countDown").GetComponent<Text>();
-        AdviseText = GameObject.Find("AdviseText").GetComponent<Text>();
+        //AdviseText = GameObject.Find("AdviseText").GetComponent<Text>();
+        Notification = GameObject.Find("Notification").gameObject;
+        AdviseText = GameObject.Find("Notification").GetComponentInChildren<Text>();
         Timer = GameObject.Find("Timer").GetComponent<Text>();
         StaticItems.CountDown.gameObject.SetActive(false);
         //ChoosedAngles.Add(1);

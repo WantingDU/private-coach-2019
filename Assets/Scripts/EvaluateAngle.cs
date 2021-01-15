@@ -80,8 +80,6 @@ public class EvaluateAngle : MonoBehaviour
                 OP_Sin[i] = 0;
             }
         }
-        //print("left elbow cos: " + OP_Cos[3]);
-        //print("left elbow sin: " + OP_Sin[3]);
         //print("left elbow angle: " + Mathf.Sign(OP_Sin[3]) * Mathf.Acos(OP_Cos[3]) * 57.29578f);
     }
     public static void Compute_Model_PseudoAngle(List<Transform> poseJoints)
@@ -131,29 +129,31 @@ public class EvaluateAngle : MonoBehaviour
                 {
                     if (!((OP_Cos[i] == 0) && (OP_Sin[i] == 0)))
                     {
-                        float OP_angle = Compute_angle(OP_Sin[i], OP_Cos[i]);
-                        float Ref_angle = Compute_angle(Ref_Sin[i], Ref_Cos[i]);
-                        PointScore[i, 0] = 1-Mathf.Abs(OP_angle - Ref_angle) / (2 * Mathf.PI);
+                        //float OP_angle = Compute_angle(OP_Sin[i], OP_Cos[i]);
+                        //float Ref_angle = Compute_angle(Ref_Sin[i], Ref_Cos[i]);
+                        //PointScore[i, 0] = 1-Mathf.Abs(OP_angle - Ref_angle) / (2 * Mathf.PI);
+                        PointScore[i,0] = (1 - Mathf.Abs((OP_Cos[i] - Ref_Cos[i] + OP_Sin[i] - Ref_Sin[i]) / 2.828f));
                         score += PointScore[i,0];
                         n += 1;
 
-                    //===============================================
+                    /*===============================================
                         if (i == checkJoint_static)
                         {
                             StaticItems.AdviseText.gameObject.SetActive(true);
-                            StaticItems.AdviseText.text = "OP:"+((int)Math.Round(OP_angle *57.3)).ToString()+","+ "Ref:" + ((int)Math.Round(Ref_angle * 57.3)).ToString()+"  "+StaticItems.ErrorMessage;
+                            StaticItems.AdviseText.text = OP_Cos[i].ToString() + " " + Ref_Cos[i].ToString()+" "+ StaticItems.ErrorMessage;
+                            //StaticItems.AdviseText.text = "OP:"+((int)Math.Round(OP_angle *57.3)).ToString()+","+ "Ref:" + ((int)Math.Round(Ref_angle * 57.3)).ToString()+"  "+StaticItems.ErrorMessage;
                         }
-                    //===============================================   
+                    //===============================================   */
                     //Evaluate if the user's angle is small/big compare to the standard p
-                    if (OP_angle > Ref_angle)
-                            {
-                                PointScore[i, 1] = 1; //angle utilisateur trop grand/ouvert
-                            }
+                    if (OP_Cos[i] >Ref_Cos[i])
+                        {
+                            PointScore[i, 1] = 1; //angle utilisateur trop grand/ouvert
+                        }
                         else
-                            {
-                                PointScore[i, 1] = 0;
-                            }
-                }
+                        {
+                            PointScore[i, 1] = 0;
+                        }
+                    }
                     else 
                     {
                         PointScore[i,0] = 0;
