@@ -138,7 +138,7 @@ public class EvaluateAngle : MonoBehaviour
                     //float Ref_angle = Compute_angle(Ref_Sin[i], Ref_Cos[i])* 57.3f;
                     //print("OP_angle:"+OP_angle +"  "+ "Ref_angle:" + Ref_angle);
                     invisible_counter[i] = 0;
-                    PointScore[i,0] = (1 - Mathf.Abs((OP_Cos[i] - Ref_Cos[i] + OP_Sin[i] - Ref_Sin[i]) / 2.828f));
+                    PointScore[i,0] = (1 - StaticItems.eval_standard * (Mathf.Abs((OP_Cos[i] - Ref_Cos[i] + OP_Sin[i] - Ref_Sin[i]) / 2.828f)));
                     score += PointScore[i,0];
                     n += 1;
 
@@ -167,8 +167,7 @@ public class EvaluateAngle : MonoBehaviour
                     if (invisible_counter[i] >= 30)
                     {
                         invisible_counter[i] = 0;
-                        StaticItems.ErrorMessage = "certaines articulations non visible" ;
-                        print(StaticItems.ErrorMessage);
+                        StaticItems.ErrorMessage = "certaines articulations non visibles" ;
                         StaticItems.AdviseText.text = StaticItems.ErrorMessage;
                         StaticItems.Notification.GetComponent<LeanPulse>().Pulse();
                     }

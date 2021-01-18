@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+﻿ using UnityEngine;
 using System.Collections.Generic;
 using Lean.Common;
 
@@ -87,6 +87,7 @@ namespace Lean.Gui
 			{
 				if (LeanInput.GetDown(CloseKey) == true)
 				{
+                    print("CLOSING");
 					CloseTopMost();
 				}
 			}
