@@ -127,57 +127,58 @@ public class EvaluateAngle : MonoBehaviour
     public static float ComputeScore()
         {
             float score = 0f;
-            int n = 0;
+            int n = 0; //number of observed joints
             for (int i = 0; i < 10; i++)
             {
-            if (StaticItems.ChoosedAngles.Contains(i))
-            {
-                if (!((OP_Cos[i] == 0) && (OP_Sin[i] == 0))) //if is joint observed
+                if (StaticItems.ChoosedAngles.Contains(i))
                 {
-                    //float OP_angle = Compute_angle(OP_Sin[i], OP_Cos[i])*57.3f;
-                    //float Ref_angle = Compute_angle(Ref_Sin[i], Ref_Cos[i])* 57.3f;
-                    //print("OP_angle:"+OP_angle +"  "+ "Ref_angle:" + Ref_angle);
-                    invisible_counter[i] = 0;
-                    PointScore[i,0] = (1 - StaticItems.eval_standard * (Mathf.Abs((OP_Cos[i] - Ref_Cos[i] + OP_Sin[i] - Ref_Sin[i]) / 2.828f)));
-                    score += PointScore[i,0];
-                    n += 1;
-
-                    /*===============================================
-                        if (i == checkJoint_static)
-                        {
-                            StaticItems.AdviseText.gameObject.SetActive(true);
-                            StaticItems.AdviseText.text = OP_Cos[i].ToString() + " " + Ref_Cos[i].ToString()+" "+ StaticItems.ErrorMessage;
-                            //StaticItems.AdviseText.text = "OP:"+((int)Math.Round(OP_angle *57.3)).ToString()+","+ "Ref:" + ((int)Math.Round(Ref_angle * 57.3)).ToString()+"  "+StaticItems.ErrorMessage;
-                        }
-                    //===============================================   */
-                    //Evaluate if the user's angle is small/big compare to the standard p
-                    if (OP_Cos[i] >Ref_Cos[i])
-                        {
-                            PointScore[i, 1] = 1; //angle utilisateur trop grand/ouvert
-                        }
-                        else
-                        {
-                            PointScore[i, 1] = 0;
-                        }
-                }
-                else 
-                {
-                    PointScore[i,0] = 0;
-                    invisible_counter[i] += 1;
-                    if (invisible_counter[i] >= 30)
+                    if (!((OP_Cos[i] == 0) && (OP_Sin[i] == 0))) //if is joint observed
                     {
+                        //float OP_angle = Compute_angle(OP_Sin[i], OP_Cos[i])*57.3f;
+                        //float Ref_angle = Compute_angle(Ref_Sin[i], Ref_Cos[i])* 57.3f;
+                        //print("OP_angle:"+OP_angle +"  "+ "Ref_angle:" + Ref_angle);
                         invisible_counter[i] = 0;
-                        StaticItems.ErrorMessage = "certaines articulations non visibles" ;
-                        StaticItems.AdviseText.text = StaticItems.ErrorMessage;
-                        StaticItems.Notification.GetComponent<LeanPulse>().Pulse();
+                        PointScore[i,0] = (1 - StaticItems.eval_standard * (Mathf.Abs((OP_Cos[i] - Ref_Cos[i] + OP_Sin[i] - Ref_Sin[i]) / 2.828f)));
+                        score += PointScore[i,0];
+                        StaticItems.frameCounter[i] += 1;
+                        StaticItems.scoresStatistics[i] = (StaticItems.scoresStatistics[i] * (StaticItems.frameCounter[i] - 1) + PointScore[i, 0]) / StaticItems.frameCounter[i];
+                        n += 1;
+                        /*===============================================
+                            if (i == checkJoint_static)
+                            {
+                                StaticItems.AdviseText.gameObject.SetActive(true);
+                                StaticItems.AdviseText.text = OP_Cos[i].ToString() + " " + Ref_Cos[i].ToString()+" "+ StaticItems.ErrorMessage;
+                                //StaticItems.AdviseText.text = "OP:"+((int)Math.Round(OP_angle *57.3)).ToString()+","+ "Ref:" + ((int)Math.Round(Ref_angle * 57.3)).ToString()+"  "+StaticItems.ErrorMessage;
+                            }
+                        //===============================================   */
+                        //Evaluate if the user's angle is small/big compare to the standard p
+                        if (OP_Cos[i] >Ref_Cos[i])
+                            {
+                                PointScore[i, 1] = 1; //angle utilisateur trop grand/ouvert
+                            }
+                            else
+                            {
+                                PointScore[i, 1] = 0;
+                            }
+                    }
+                    else 
+                    {
+                        PointScore[i,0] = 0;
+                        invisible_counter[i] += 1;
+                        if (invisible_counter[i] >= 30)
+                        {
+                            invisible_counter[i] = 0;
+                            StaticItems.ErrorMessage = "certaines articulations non visibles" ;
+                            StaticItems.AdviseText.text = StaticItems.ErrorMessage;
+                            StaticItems.Notification.GetComponent<LeanPulse>().Pulse();
+                        }
                     }
                 }
             }
-        }
 
         if (n != 0)
         {
-            score = (100f * (score / n));
+            score = Mathf.Round((100f * (score / n)));
         }
         StaticItems.ScoreText.text = score.ToString("F0") + '%';
         if(AnimSpeedController.started)
@@ -188,10 +189,17 @@ public class EvaluateAngle : MonoBehaviour
     {
         counter += 1;
         sumScore += score;
-        average = sumScore / counter;
-        StaticItems.Avg_text.text = "Average score: " + average + " %\n" + "Duration: " + (60*StaticItems.sportDuration-StaticItems.elapsedTime) + " s\n"+
-                                    "Difficulty: "+StaticItems.difficulty+
-                                    "\n\nThe joint you are doing wrong the most is "+ jointsName[StaticItems.errorStatistics.ToList().IndexOf(StaticItems.errorStatistics.Max())];
+        average = Mathf.Round((float)sumScore / counter);
+        StaticItems.Avg_text.text = "Average score: " + average + " %\n" + "Duration: " + (60 * StaticItems.sportDuration - StaticItems.elapsedTime) + " s\n" +
+                                    "Difficulty: " + StaticItems.difficulty +
+                                    "\n\nThe joint you are doing wrong the most is " + jointsName[StaticItems.errorStatistics.ToList().IndexOf(StaticItems.errorStatistics.Max())] +
+                                    "\nScore of each joint:";
+        for(int idx=0;idx<10;idx++)
+        {
+            if(StaticItems.ChoosedAngles.Contains(idx))
+                StaticItems.Avg_text.text += "\n" + jointsName[idx] + ":" + Mathf.Round(100*(float)StaticItems.scoresStatistics[idx])+" %";
+        }
+
     }
 }
 

@@ -8,6 +8,7 @@ using PlayFab.ClientModels;
 using Debug = UnityEngine.Debug;
 using System.Linq;
 using System;
+using Lean.Gui;
 
 public class StaticItems : MonoBehaviour
 {
@@ -24,7 +25,7 @@ public class StaticItems : MonoBehaviour
     public static GameObject Notification;
     public static Text Timer;
     public static string AnimName;
-    public static int sportDuration { set; get; }
+    public static double sportDuration { set; get; }
     public static int elapsedTime;
     public static float eval_standard { set; get; }
     public static List<int> ChoosedAngles = new List<int>(new int[] { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 });
@@ -35,11 +36,16 @@ public class StaticItems : MonoBehaviour
     public static string difficulty { set; get; }
     public static string ErrorTime;
     public static int[] errorStatistics=new int[10];
+    public static double[] scoresStatistics = new double[10];
+    public static int[] frameCounter=new int[10];
     public void sportDuration_string() {
         string sportDuration_string = GameObject.Find("inputText_duration").GetComponent<Text>().text;
-        sportDuration= int.Parse(sportDuration_string);
+        sportDuration= double.Parse(sportDuration_string);
     }
-
+    public void leftWindowHide()
+    {
+        GameObject.Find("Left Box").GetComponent<LeanSnap>().SnapWrapper(-1000f);
+    }
     private void Awake()
     {
         eval_standard = 0.7f;
@@ -56,14 +62,7 @@ public class StaticItems : MonoBehaviour
         AdviseText = GameObject.Find("Notification").GetComponentInChildren<Text>();
         Timer = GameObject.Find("Timer").GetComponent<Text>();
         StaticItems.CountDown.gameObject.SetActive(false);
-        //ChoosedAngles.Add(1);
-        //ChoosedAngles.Add(3);
-        /*
-        if (userID == null) userID = "default ID";
-        mail = "skynet@insa.com";
-        password = "123456789";
-        username = "dubiName";
-        */
+
 
     }
     public static void ClientGetTitleData(string sportName)

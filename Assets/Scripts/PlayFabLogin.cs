@@ -71,6 +71,9 @@ public class PlayFabLogin : MonoBehaviour
         Debug.Log("Congratulations, you registered successful your account!");
         MessageText.text = "Congratulations, you registered successful!";
         MessagePulse.GetComponent<LeanPulse>().Pulse();
+        PlayerPrefs.SetString("EMAIL", StaticItems.mail);
+        PlayerPrefs.SetString("PASSWORD", StaticItems.password);
+        PlayerPrefs.SetString("USERNAME", StaticItems.username);
     }
     private void onRegisterFailure(PlayFabError error)
     {
@@ -97,6 +100,8 @@ public class PlayFabLogin : MonoBehaviour
             print(StaticItems.mail +" Password = " +StaticItems.password);
             var requestMail = new LoginWithEmailAddressRequest { Email = StaticItems.mail, Password = StaticItems.password };
             PlayFabClientAPI.LoginWithEmailAddress(requestMail, OnLoginSuccess, OnLoginFailure);
+
+
         //}
 
     }

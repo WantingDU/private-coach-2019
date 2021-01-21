@@ -70,9 +70,12 @@ namespace OpenPose.Example {
                 }
             }
             //--------------This section is for PILS test: evaluation of angle-------------//
-            EvaluateAngle.Compute_OP_PseudoAngle(poseJoints);
-            EvaluateAngle.Compute_Model_PseudoAngle(standardModel.GetComponent<ModelToBody25>().poseStandard);
-            EvaluateAngle.ComputeScore();
+            if (AnimSpeedController.clicked_start)
+            {
+                EvaluateAngle.Compute_OP_PseudoAngle(poseJoints);
+                EvaluateAngle.Compute_Model_PseudoAngle(standardModel.GetComponent<ModelToBody25>().poseStandard);
+                EvaluateAngle.ComputeScore();
+            }
             //--------------This section is for PILS test: evaluation of angle-------------//
         }
 

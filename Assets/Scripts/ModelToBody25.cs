@@ -55,7 +55,7 @@ public class ModelToBody25 : MonoBehaviour
         {
             sum += tab[col, i];
         }
-        UnityEngine.Debug.Log("RATIO : " + sum.ToString() + "   COL : " + col.ToString());
+        //UnityEngine.Debug.Log("RATIO : " + sum.ToString() + "   COL : " + col.ToString());
         return sum;
     }
 
@@ -98,8 +98,6 @@ public class ModelToBody25 : MonoBehaviour
                             StaticItems.ErrorMessage = advices[i, (int)EvaluateAngle.PointScore[i, 1]];
                             StaticItems.AdviseText.text = StaticItems.ErrorMessage;
                             StaticItems.Notification.GetComponent<LeanPulse>().Pulse();
-                            //update stat
-                            //StaticItems.ErrorTime = DateTime.Now.ToString();
                         }
                     }
                     else

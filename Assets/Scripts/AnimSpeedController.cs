@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Lean.Gui;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -80,6 +81,8 @@ public class AnimSpeedController : MonoBehaviour
             EvaluateAngle.average = 0;
             EvaluateAngle.counter = 0;
             EvaluateAngle.sumScore = 0;
+            StaticItems.frameCounter = new int[10];
+            StaticItems.scoresStatistics = new double[10];
         }
 
         started = !started;
@@ -88,7 +91,7 @@ public class AnimSpeedController : MonoBehaviour
 
     IEnumerator executeTimer()
     {
-        for(int i= StaticItems.sportDuration*60; i >=0; i--)
+        for(int i= (int)Math.Round(StaticItems.sportDuration*60); i >=0; i--)
         {
             StaticItems.elapsedTime = i;
             StaticItems.Timer.text = i.ToString()+"s";
@@ -96,6 +99,7 @@ public class AnimSpeedController : MonoBehaviour
         }
         StaticItems.Timer.text = "Finished!";
         onClickStart();
+        GameObject.Find("Screens").GetComponent<LeanSnap>().SnapWrapper(-4000f);
     }
 
 

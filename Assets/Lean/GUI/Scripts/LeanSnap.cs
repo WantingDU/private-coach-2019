@@ -63,9 +63,9 @@ namespace Lean.Gui
 			cachedRectTransform = GetComponent<RectTransform>();
 		}
         ///----------------------------- PILS ----------------
-        public void SnapWrapper()
+        public void SnapWrapper(float distance)
         {
-            cachedRectTransform.anchoredPosition = new Vector2(-1000f, 0f);
+            cachedRectTransform.anchoredPosition = new Vector2(distance, 0f);
         }
         ///----------------------------- PILS ----------------
 
