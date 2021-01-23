@@ -16,6 +16,7 @@ public class ModelToBody25 : MonoBehaviour
     private int[,] errorCounter = new int[10, StaticItems.frameInterval];
     private int[,] moyPointScore = new int[10, 2]; //pour chaque point : [sum, moy]
     private int[] written = { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
+    /*
     public static string[,] advices1 = {{"bassez votre bras droit ", "levez votre bras droit"},
                                         {"écartez votre bras droit", "serrez votre bras droit"},
                                         {"bassez votre bras gauche ", "levez votre bras gauche" },
@@ -25,7 +26,7 @@ public class ModelToBody25 : MonoBehaviour
                                         {"pliez votre genoux droit", "pliez votre genoux gauche"},
                                         {"serrez votre cuisse gauche", "ecartez votre cuisse gauche"},
                                         {"pliez votre genoux gauche", "pliez votre genoux gauche"}};
-    public static string[,] advices = {{"attention à votre épaule droit","attention à votre épaule droit"},
+    public static string[,] advices2 = {{"attention à votre épaule droit","attention à votre épaule droit"},
                                         {"attention à votre bras droit","attention à votre bras droit"},
                                         {"attention à  votre épaule gauche","attention à  votre épaule gauche" },
                                         {"attention à  votre bras gauche","attention à  votre bras gauche" },
@@ -34,6 +35,16 @@ public class ModelToBody25 : MonoBehaviour
                                         {"pliez votre genoux droit", "pliez votre genoux gauche"},
                                         {"serrez votre cuisse gauche", "ecartez votre cuisse gauche"},
                                         {"pliez votre genoux gauche", "pliez votre genoux gauche"}};
+    */
+    public static string[,] advices = {{"Attention à votre épaule droite","Attention à votre épaule droite"},
+                                        {"Attention à votre bras droit","Attention à votre bras droit"},
+                                        {"Attention à votre épaule gauche","Attention à votre épaule gauche" },
+                                        {"Attention à votre bras gauche","Attention à votre bras gauche" },
+                                        {"Penchez vers la gauche","Penchez vers la droite"},{"Penchez vers la droite","Penchez vers la gauche"},
+                                        {"Serrez votre cuisse droite", "Écartez votre cuisse droite"},
+                                        {"Pliez votre genou droit", "Pliez votre genou gauche"},
+                                        {"Serrez votre cuisse gauche", "Écartez votre cuisse gauche"},
+                                        {"Pliez votre genou gauche", "Pliez votre genou gauche"}};
     //--------------------- PILS ------------------------------/
     private void Awake()
     {

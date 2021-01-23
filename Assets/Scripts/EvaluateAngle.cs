@@ -168,7 +168,7 @@ public class EvaluateAngle : MonoBehaviour
                         if (invisible_counter[i] >= 30)
                         {
                             invisible_counter[i] = 0;
-                            StaticItems.ErrorMessage = "certaines articulations non visibles" ;
+                            StaticItems.ErrorMessage = "Certaines articulations non visibles" ;
                             StaticItems.AdviseText.text = StaticItems.ErrorMessage;
                             StaticItems.Notification.GetComponent<LeanPulse>().Pulse();
                         }
