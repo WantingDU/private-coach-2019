@@ -13683,7 +13683,7 @@ MonoBehaviour:
   onClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 942061785}
+      - m_Target: {fileID: 1067577726}
         m_MethodName: TurnOn
         m_Mode: 1
         m_Arguments:
@@ -15857,11 +15857,12 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 1
     m_LineSpacing: 1
-  m_Text: '<size=120>RUN</size>
+  m_Text: '<size=120>YOGA</size>
 
-    Running can assist people in losing weight,
-    staying in shape and improving body composition. Research suggests that the person
-    of average weight will burn approximately 100 calories per mile run.'
+    Maintaining a regular yoga practice can provide
+    physical and mental health benefits.The relaxation techniques incorporated in
+    yoga can lessen chronic pain, such as lower back pain, arthritis, headaches and
+    carpal tunnel syndrome.'
 --- !u!222 &1314537094
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -24698,8 +24699,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.5}
   m_AnchorMax: {x: 0, y: 0.5}
-  m_AnchoredPosition: {x: -350, y: 0}
-  m_SizeDelta: {x: 600, y: 1169.6863}
+  m_AnchoredPosition: {x: -300, y: 0}
+  m_SizeDelta: {x: 500, y: 1169.6863}
   m_Pivot: {x: 0, y: 0.5}
 --- !u!114 &1930293810
 MonoBehaviour:
@@ -24714,7 +24715,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   horizontal: 1
-  horizontalPixelMin: -350
+  horizontalPixelMin: -300
   horizontalPixelMax: 0
   horizontalRectMin: 0
   horizontalRectMax: 0
