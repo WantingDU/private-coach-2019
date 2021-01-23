@@ -2470,7 +2470,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 1
     m_VerticalOverflow: 1
     m_LineSpacing: 1
-  m_Text: Sign in
+  m_Text: Sign up
 --- !u!222 &1266658839
 CanvasRenderer:
   m_ObjectHideFlags: 0
