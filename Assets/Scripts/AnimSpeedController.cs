@@ -100,6 +100,8 @@ public class AnimSpeedController : MonoBehaviour
         StaticItems.Timer.text = "Finished!";
         onClickStart();
         GameObject.Find("Screens").GetComponent<LeanSnap>().SnapWrapper(-4000f);
+        GameObject.Find("Screens").GetComponent<LeanDrag>().enabled = true;
+        GameObject.Find("fixScreen").gameObject.GetComponent<LeanToggle>().Set(false);
     }
 
 

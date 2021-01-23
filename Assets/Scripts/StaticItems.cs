@@ -49,8 +49,8 @@ public class StaticItems : MonoBehaviour
     private void Awake()
     {
         eval_standard = 0.7f;
-        frameInterval = 300;
-        messageRate = 50;
+        frameInterval = 200;
+        messageRate = 30;
         difficulty = "Easy";
         sportDuration = 1;//default 1 min
         Coach = GameObject.Find("godot");

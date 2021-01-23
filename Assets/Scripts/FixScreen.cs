@@ -19,4 +19,5 @@ public class FixScreen : MonoBehaviour
     {
         drag.enabled = !this.GetComponent<LeanToggle>().On;
     }
+
 }
